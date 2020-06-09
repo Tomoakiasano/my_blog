@@ -1,0 +1,6 @@
+<h1>記事詳細</h1>
+<h2><%= @article.subject %></h2>
+<p><%= @article.body %></p>
+<%= link_to '記事を修正する', edit_article_path(@article) %>
+<%= link_to '記事を削除する', article_path(@article), method: :delete, data: { confirm: '削除しますか？' } %>
+<%= link_to '記事一覧へ戻る', articles_path %>

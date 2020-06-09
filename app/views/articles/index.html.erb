@@ -1,0 +1,9 @@
+<h1>記事一覧</h1>
+<% @articles.each do |article| %>
+  <h2><%= article.subject %></h2>
+  <%= link_to '記事詳細はこちら', article_path(article) %>
+  <%= link_to '記事を修正する', edit_article_path(article) %>
+  <hr>
+  <br>
+<% end %>
+<%= link_to '新しい記事を書く', new_article_path %>

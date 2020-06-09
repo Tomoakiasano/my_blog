@@ -1,0 +1,6 @@
+<h1>記事更新</h1>
+<%= form_for @article, url: { action: 'update' } do |f| %>
+  <%= f.text_field :subject %>
+  <%= f.text_area :body %>
+  <%= f.submit '記事を修正する' %>
+<% end %>
