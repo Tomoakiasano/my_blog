@@ -1,4 +1,9 @@
 <h1>記事更新</h1>
+<% if @article.errors %>
+  <% @article.errors.full_messages.each do |message| %>
+    <%= message %><br>
+  <% end %>
+<% end %>
 <%= form_for @article, url: { action: 'update' } do |f| %>
   <%= f.text_field :subject %>
   <%= f.text_area :body %>

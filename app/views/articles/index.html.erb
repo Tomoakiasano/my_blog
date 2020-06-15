@@ -1,4 +1,5 @@
 <h1>記事一覧</h1>
+<%= link_to '新しい記事を書く', new_article_path %>
 <% @articles.each do |article| %>
   <h2><%= article.subject %></h2>
   <%= link_to '記事詳細はこちら', article_path(article) %>
