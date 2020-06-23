@@ -11,6 +11,7 @@ gem 'webpacker'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'bootsnap'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -18,6 +19,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rubocop', require: false
   gem 'rubocop-rails'
 end
 

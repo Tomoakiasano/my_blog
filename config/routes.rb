@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :articles
+  patch 'article/published', to: 'articles#published_article'
+  patch 'article/unpublished', to: 'articles#unpublished_article'
 
-  get '*path', controller: 'application', action: 'render_404'
+  get '*not_found', controller: 'errors', action: 'render_404'
+  post '*not_found', controller: 'errors', action: 'render_404'
 end

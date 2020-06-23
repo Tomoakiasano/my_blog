@@ -1,10 +1,8 @@
 <h1>新規記事</h1>
 <% if @article.errors %>
-  <% @article.errors.full_messages.each do |message| %>
-    <%= message %><br>
-  <% end %>
+  <%= render 'error_message', error_messages: @article.errors %>
 <% end %>
-<%= form_for @article, url: { action: 'create' } do |f| %>
+<%= form_for @article do |f| %>
   <%= f.text_field :subject %>
   <%= f.text_area :body %>
   <%= f.submit '記事を作成する' %>
