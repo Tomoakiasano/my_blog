@@ -1,3 +1,5 @@
-<% error_messages.full_messages.each do |message| %>
+<% if errors %>
+  <% errors.full_messages.each do |message| %>
     <%= message %><br>
+  <% end %>
 <% end %>
