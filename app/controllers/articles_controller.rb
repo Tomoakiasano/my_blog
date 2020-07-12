@@ -1,12 +1,13 @@
 class ArticlesController < ApplicationController
     before_action :search_article, only: %i[show edit update destroy]
+    before_action :authenticate_user!
 
     def new
       @article = Article.new
     end
 
     def index
-      @articles = Article.status_published.order(created_at: :desc).page(params[:page]).per(10)
+      @articles = Article.where(user_id: current_user).status_published.order(created_at: :desc).page(params[:page]).per(10)
     end
 
     def show; end
