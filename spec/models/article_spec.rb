@@ -1,27 +1,40 @@
 require 'rails_helper'
 
 describe Article do
-  let(:article) { article = Article.new(subject: 'test', body: 'test', published_status: true) }
-  let(:article_no_subject) { article = Article.new(subject: nil, body: 'test', published_status: true) }
-  let(:article_no_body) { article = Article.new(subject: 'test', body: nil, published_status: true) }
-  let(:article_maximum_subject) { article = Article.new(subject: 't' * 101, body: 'test', published_status: true) }
-  let(:article_maximum_body) { article = Article.new(subject: 'test', body: 't'* 5001, published_status: true) }
+  let(:article) { FactoryBot.build(:article) }
 
   describe 'Article' do
-    it '有効な値ならArticleが生成される' do
-      expect(article).to be_valid
+    subject { article.valid? }
+    it '有効な値ならバリデーションOK' do
+      is_expected.to be_truthy
     end
-    it 'subjectがない場合はNG' do
-      expect(article_no_subject).to be_invalid
+    context 'subjectがない場合' do
+      let(:article_no_subject) { FactoryBot.build(:article, :article_no_subject) }
+      subject { article_no_subject.valid? }
+      it 'バリデーションNG' do
+        is_expected.to be_falsy
+      end
     end
-    it 'bodyがない場合はNG' do
-      expect(article_no_body).to be_invalid
+    context 'bodyがない場合' do
+      let(:article_no_body) { FactoryBot.build(:article, :article_no_body) }
+      subject { article_no_body.valid? }
+      it 'バリデーションNG' do
+        is_expected.to be_falsy
+      end
     end
-    it 'subjectが101文字以上の場合はNG' do
-      expect(article_maximum_subject).to be_invalid
+    context 'subjectが51文字以上の場合' do
+      let(:article_maximum_subject) { FactoryBot.build(:article, :article_maximum_subject) }
+      subject { article_maximum_subject.valid? }
+      it 'バリデーションNG' do
+        is_expected.to be_falsy
+      end
     end
-    it 'bodyが5001文字以上の場合はNG' do
-      expect(article_maximum_body).to be_invalid
+    context 'bodyが5001文字以上の場合' do
+      let(:article_maximum_body) { FactoryBot.build(:article, :article_maximum_body) }
+      subject { article_maximum_body.valid? }
+      it 'バリデーションNG' do
+        is_expected.to be_falsy
+      end
     end
   end
 end

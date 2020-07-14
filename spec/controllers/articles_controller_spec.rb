@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 describe ArticlesController, type: :controller do
-  let(:article) { Article.create(subject: 'test', body: 'test', published_status: true) }
+  let(:article) { FactoryBot.create(:article) }
   
   describe '#index' do
-    subject do
-      get :index
-    end
+    subject { get :index }
+
     it '200が返る' do
       expect(subject).to have_http_status(:success)
     end
@@ -45,11 +44,12 @@ describe ArticlesController, type: :controller do
             body: 'test',
             published_status: true
           }
-        } 
+        }
       }.to change(Article, :count).by(1)
+      expect(response).to have_http_status(:redirect)
     end
-    it '値が不正の場合newwを読み直す' do
-      expect(subject).to render_template(:new)
+    it '値が不正の場合newを読み直す' do
+      expect(subject).to render_template(:form)
     end
   end
 
@@ -61,7 +61,7 @@ describe ArticlesController, type: :controller do
       expect(subject).to have_http_status(:success)
     end
     it 'render edit' do
-      expect(subject).to render_template(:edit)
+      expect(subject).to render_template(:form)
     end
   end
 
@@ -74,7 +74,7 @@ describe ArticlesController, type: :controller do
     it '更新の値が不正な場合editをrender' do
       article_params = { subject: nil }
       patch :update , params: { id: article, article: article_params }
-      expect(response).to render_template(:edit)
+      expect(response).to render_template(:form)
     end
   end
 

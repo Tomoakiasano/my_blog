@@ -1,12 +1,13 @@
 class ArticlesController < ApplicationController
-    before_action :search_article, only: %i[show edit update destroy]
+    before_action :find_article, only: %i[show edit update destroy]
 
     def new
       @article = Article.new
+      render 'form'
     end
 
     def index
-      @articles = Article.status_published.order(created_at: :desc).page(params[:page]).per(10)
+      @articles = Article.status_published.page(params[:page]).per(Article::PAGENATION_NUM)
     end
 
     def show; end
@@ -14,29 +15,23 @@ class ArticlesController < ApplicationController
     def create
       @article = Article.new(article_params)
       if @article.valid?
-        begin   
-          @article.save!
-          redirect_to(article_path(@article))          
-        rescue => e
-          Rails.logger.info e
-        end
+        @article.save!
+        redirect_to(article_path(@article))       
       else
-        render :new
+        render 'form'
       end
     end
 
-    def edit; end
+    def edit
+      render 'form'
+    end
 
     def update
       if @article.valid?
-        begin
           @article.update!(article_params)
-          redirect_to(article_path(@article))  
-        rescue => e
-          Rails.logger.info e
-        end
+          redirect_to(article_path(@article))
       else
-        render :edit
+        render 'form'
       end
     end
 
@@ -51,7 +46,7 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:subject, :body, :published_status)
     end
 
-    def search_article
+    def find_article
       @article = Article.find(params[:id])
     end
 end
