@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ArticlesController, type: :controller do
-  let(:article) { FactoryBot.create(:article) }
+  let(:article) { create(:article) }
   
   describe '#index' do
     subject { get :index }

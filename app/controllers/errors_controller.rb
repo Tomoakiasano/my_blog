@@ -8,7 +8,7 @@ class ErrorsController < ApplicationController
   end
   
   def render_500(error = nil)
-    @error = error.backtrace
+    @errors = error
     render template: 'errors/error_500', status: :internal_server_error
   end
 end

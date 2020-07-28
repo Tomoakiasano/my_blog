@@ -1,2 +1,4 @@
 <h1>500だよ</h1>
-<%= @error %>
+<% @errors.each do |error| %>
+  <%= error %>
+<% end %>
