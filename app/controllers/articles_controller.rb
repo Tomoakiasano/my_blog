@@ -7,13 +7,13 @@ class ArticlesController < ApplicationController
     end
 
     def index
-      @articles = Article.where(user_id: current_user).status_published.order(created_at: :desc).page(params[:page]).per(10)
+      @articles = current_user.articles.status_published.order(created_at: :desc).page(params[:page]).per(10)
     end
 
     def show; end
 
     def create
-      @article = Article.new(article_params)
+      @article = current_user.articles.new(article_params)
       if @article.valid?
         begin   
           @article.save!
