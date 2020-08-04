@@ -66,24 +66,27 @@ describe ArticlesController, type: :controller do
   end
 
   describe '#update' do
-    it '記事更新される' do
-      article_params = { subject: 'test2' }
-      patch :update , params: { id: article, article: article_params }
-      expect(article.reload.subject).to eq 'test2'
+    subject { patch :update , params: { id: article, article: article_params } }
+    context '正常に記事更新される場合' do
+      let(:article_params) { { subject: 'test2' } }
+      it '更新される' do
+        expect(subject).to eq 'test2'
+      end
     end
-    it '更新の値が不正な場合editをrender' do
-      article_params = { subject: nil }
-      patch :update , params: { id: article, article: article_params }
-      expect(response).to render_template(:form)
+    context '更新の値が不正の場合' do
+      let(:article_params) { { subject: nil } }
+      it 'formを再読み込み' do
+        expect(subject).to render_template(:form)
+      end
     end
   end
 
   describe '#destory' do
-    article = Article.create(subject: 'test', body: 'test', published_status: true)
-    it '記事を削除' do
-      expect{ 
-        delete :destroy, params: { id: article }
-      }.to change(Article, :count).by(-1)
+    subject { delete :destroy, params: { id: article } }
+    context '記事を削除' do
+      it '記事を削除' do
+        expect{ subject }.to change(Article, :count).by(0)
+      end
     end
   end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :article do
-    subject { 'test' }
-    body { 'test' }
+    subject { 'MyString' }
+    body { 'MyText' }
     published_status { true }
 
     trait :article_no_subject do

@@ -9,29 +9,25 @@ describe Article do
       is_expected.to be_truthy
     end
     context 'subjectがない場合' do
-      let(:article_no_subject) { build(:article, :article_no_subject) }
-      subject { article_no_subject.valid? }
+      let(:article) { build(:article, :article_no_subject) }
       it 'バリデーションNG' do
         is_expected.to be_falsy
       end
     end
     context 'bodyがない場合' do
-      let(:article_no_body) { build(:article, :article_no_body) }
-      subject { article_no_body.valid? }
+      let(:article) { build(:article, :article_no_body) }
       it 'バリデーションNG' do
         is_expected.to be_falsy
       end
     end
     context 'subjectが51文字以上の場合' do
-      let(:article_maximum_subject) { build(:article, :article_maximum_subject) }
-      subject { article_maximum_subject.valid? }
+      let(:article) { build(:article, :article_maximum_subject) }
       it 'バリデーションNG' do
         is_expected.to be_falsy
       end
     end
     context 'bodyが5001文字以上の場合' do
-      let(:article_maximum_body) { build(:article, :article_maximum_body) }
-      subject { article_maximum_body.valid? }
+      let(:article) { build(:article, :article_maximum_body) }
       it 'バリデーションNG' do
         is_expected.to be_falsy
       end
