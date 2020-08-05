@@ -19,7 +19,7 @@ end
     user.articles.create!(
       subject: "test#{n}",
       body: "テストだよ" * n,
-      published_status: true
+      published_status: n.even? ? true : false
     )
   end
 end

@@ -7,13 +7,13 @@ class ArticlesController < ApplicationController
     end
 
     def index
-      @articles = current_user.articles.status_published.order(created_at: :desc).page(params[:page]).per(10)
+      @articles = my_articles.status_published.order(created_at: :desc).page(params[:page]).per(10)
     end
 
     def show; end
 
     def create
-      @article = current_user.articles.new(article_params)
+      @article = my_articles.new(article_params)
       if @article.valid?
         begin   
           @article.save!
@@ -47,6 +47,10 @@ class ArticlesController < ApplicationController
     end
 
     private
+
+    def my_articles
+      current_user.articles
+    end
 
     def article_params
       params.require(:article).permit(:subject, :body, :published_status)
