@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
-  PAGENATION_NUM = 10.freeze
-  validates :subject, presence: true, length: { maximum: 50 }
-  validates :body, presence: true, length: { maximum: 5_000 }
+  PAGENATION_NUM = 10
+  validates :subject, presence: true, length: {maximum: 50}
+  validates :body, presence: true, length: {maximum: 5_000}
 
   default_scope { order(created_at: :desc) }
   scope :status_published, -> { where(published_status: true) }

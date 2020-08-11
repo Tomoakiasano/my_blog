@@ -27,29 +27,18 @@ describe ArticlesController, type: :controller do
   end
 
   describe '#create' do
-    subject do
-      post :create, params: {
-        article: {
-          subject: nil,
-          body: 'test',
-          published_status: true
-        }
-      }
+    subject { post :create , params: { id: article, article: article_params } }
+    context '正常にpostされた場合' do
+      let(:article_params) { { subject: 'test', body: 'test', published_status: true } }
+      it 'articleが生成される' do
+        expect{subject}.to change(Article, :count).by(2)
+      end
     end
-    it 'articleが生成される' do
-      expect {
-        post :create, params: {
-          article: {
-            subject: 'test',
-            body: 'test',
-            published_status: true
-          }
-        }
-      }.to change(Article, :count).by(1)
-      expect(response).to have_http_status(:redirect)
-    end
-    it '値が不正の場合newを読み直す' do
-      expect(subject).to render_template(:form)
+    context '値が不正の場合' do
+      let(:article_params) { { subject: nil, body: 'test', published_status: true } }
+      it 'formをrenderし直す' do
+        expect(subject).to render_template(:form)
+      end
     end
   end
 
