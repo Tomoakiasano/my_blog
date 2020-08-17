@@ -1,4 +1,4 @@
-<h1><%= @article.id ? '記事修正' : '新着記事' %></h1>
+<h1><%= @article.new_record? ? '新着記事' : '記事修正' %></h1>
 
 <%# エラーメッセージ %>
 <%= render 'error_message', errors: @article.errors %>
@@ -7,5 +7,5 @@
   <%= f.text_field :subject %>
   <%= f.text_area :body %>
   <%= f.check_box :published_status %>
-  <%= f.submit @article.id ? '記事を修正する' : '記事を作成する' %>
+  <%= f.submit @article.new_record? ? '記事を作成する' : '記事を修正する' %>
 <% end %>
