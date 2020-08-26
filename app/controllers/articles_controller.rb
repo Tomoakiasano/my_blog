@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.status_published.page(params[:page]).per(Article::PAGENATION_NUM)
+    @articles = Article.status_published.page(params[:page])
   end
 
   def show; end

@@ -1,5 +1,4 @@
 class Article < ApplicationRecord
-  PAGENATION_NUM = 10
   validates :subject, presence: true, length: {maximum: 50}
   validates :body, presence: true, length: {maximum: 5_000}
 
