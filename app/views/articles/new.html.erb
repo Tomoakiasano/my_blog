@@ -1,6 +1,0 @@
-<h1>新規記事</h1>
-<%= form_for @article, url: { action: 'create' } do |f| %>
-  <%= f.text_field :subject %>
-  <%= f.text_area :body %>
-  <%= f.submit '記事を作成する' %>
-<% end %>

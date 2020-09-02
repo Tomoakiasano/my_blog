@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Programing Blog
+====
 
-Things you may want to cover:
+Overview
 
-* Ruby version
+# Requirements
+## サーバーサイド
+- ruby 2.7.1
+- rails 6.0.3
 
-* System dependencies
+## フロントエンド
+- vue.js 2.6.12
 
-* Configuration
+## インフラ
+- Docker 19.03.9
+- Docker-compose 1.26.1
 
-* Database creation
+### Production
+#### AWS
+- EC2
+- Loadbalancer
+- AmazonLinux2
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## DB
+- Postgresql

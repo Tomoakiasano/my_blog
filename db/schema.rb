@@ -15,11 +15,13 @@ ActiveRecord::Schema.define(version: 2020_06_07_143516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
-    t.string "subject"
-    t.string "body"
+  create_table "articles", comment: "記事管理", force: :cascade do |t|
+    t.string "subject", null: false, comment: "記事のタイトル"
+    t.text "body", null: false, comment: "記事の本文"
+    t.boolean "published_status", default: false, comment: "公開非公開ステータス"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["published_status"], name: "index_articles_on_published_status"
   end
 
 end

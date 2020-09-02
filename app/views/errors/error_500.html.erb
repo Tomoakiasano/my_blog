@@ -1,0 +1,6 @@
+<h1>500だよ</h1>
+<%= @errors.class %><br>
+<%= @errors.message %><br><br>
+<% @errors.backtrace.each do |backtrace| %>
+  <%= backtrace %>
+<% end %>

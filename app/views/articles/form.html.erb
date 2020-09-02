@@ -1,0 +1,11 @@
+<h1><%= @article.new_record? ? '新着記事' : '記事修正' %></h1>
+
+<%# エラーメッセージ %>
+<%= render 'error_message', errors: @article.errors %>
+
+<%= form_for @article do |f| %>
+  <%= f.text_field :subject %>
+  <%= f.text_area :body %>
+  <%= f.check_box :published_status %>
+  <%= f.submit @article.new_record? ? '記事を作成する' : '記事を修正する' %>
+<% end %>
