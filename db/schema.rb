@@ -10,20 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_130945) do
+ActiveRecord::Schema.define(version: 2020_09_09_191846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
+  create_table "articles", comment: "記事管理", force: :cascade do |t|
     t.string "subject", null: false, comment: "記事のタイトル"
     t.text "body", null: false, comment: "記事の本文"
     t.boolean "published_status", default: false, comment: "公開非公開ステータス"
-    t.integer "user_id", null: false, comment: "ユーザーID"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["published_status"], name: "index_articles_on_published_status"
-    t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "articles_comments", comment: "記事とコメントの中間テーブル", force: :cascade do |t|
+    t.integer "comments_id", null: false, comment: "コメントのID"
+    t.integer "article_id", null: false, comment: "記事のID"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_articles_comments_on_article_id"
+    t.index ["comments_id"], name: "index_articles_comments_on_comments_id"
+  end
+
+  create_table "comments", comment: "記事のコメント管理", force: :cascade do |t|
+    t.text "text", null: false, comment: "記事へのコメント"
+    t.integer "article_id", null: false, comment: "記事のID"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
   create_table "users", force: :cascade do |t|
